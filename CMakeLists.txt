@@ -103,9 +103,9 @@ find_package(libpointmatcher REQUIRED)
 include_directories(${libpointmatcher_INCLUDE_DIRS})
 list(APPEND require_libs ${libpointmatcher_LIBRARIES})
 #### ceres ####
-# find_package(Ceres REQUIRED)
-# include_directories(${CERES_INCLUDE_DIR})
-# list(APPEND require_libs ceres)
+find_package(Ceres REQUIRED)
+include_directories(${CERES_INCLUDE_DIR})
+list(APPEND require_libs ceres)
 
 # option(USE_OPENVDB "Use Openvdb?" OFF)
 # if(USE_OPENVDB)

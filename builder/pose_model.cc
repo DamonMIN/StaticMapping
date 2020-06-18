@@ -20,49 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef REGISTRATORS_ICP_FAST_H_
-#define REGISTRATORS_ICP_FAST_H_
+#include "builder/pose_model.h"
 
-#include <memory>
-#include <vector>
-
-#include "nabo/nabo.h"
-#include "registrators/interface.h"
-
-namespace static_map {
-namespace registrator {
-
-struct BuildData;
-using NNS = Nabo::NearestNeighbourSearch<double>;
-
-template <typename PointType>
-class IcpFast : public Interface<PointType> {
- public:
-  USE_REGISTRATOR_CLOUDS;
-
-  IcpFast();
-  ~IcpFast() = default;
-
-  PROHIBIT_COPY_AND_ASSIGN(IcpFast);
-
-  void SetInputSource(const PointCloudSourcePtr& cloud) override;
-  void SetInputTarget(const PointCloudTargetPtr& cloud) override;
-  bool Align(const Eigen::Matrix4d& guess, Eigen::Matrix4d& result) override;
-
- private:
-  std::shared_ptr<BuildData> source_cloud_;
-  std::shared_ptr<BuildData> target_cloud_;
-  std::shared_ptr<NNS> nns_kdtree_;
-
-  struct {
-    int32_t knn_for_normal_estimate = 7;
-    int32_t max_iteration = 100;
-    float dist_outlier_ratio = 0.7;
-    int32_t interior_compensation_mode = 0;
-  } options_;
-};
-
-}  // namespace registrator
-}  // namespace static_map
-
-#endif  // REGISTRATORS_ICP_FAST_H_
+namespace static_map {}  // namespace static_map

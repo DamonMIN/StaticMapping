@@ -20,49 +20,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef REGISTRATORS_ICP_FAST_H_
-#define REGISTRATORS_ICP_FAST_H_
+#ifndef BUILDER_POSE_MODEL_H_
+#define BUILDER_POSE_MODEL_H_
 
-#include <memory>
-#include <vector>
-
-#include "nabo/nabo.h"
-#include "registrators/interface.h"
+#include "common/macro_defines.h"
 
 namespace static_map {
-namespace registrator {
 
-struct BuildData;
-using NNS = Nabo::NearestNeighbourSearch<double>;
-
-template <typename PointType>
-class IcpFast : public Interface<PointType> {
+class PoseModel {
  public:
-  USE_REGISTRATOR_CLOUDS;
+  PoseModel() = default;
+  ~PoseModel();
 
-  IcpFast();
-  ~IcpFast() = default;
-
-  PROHIBIT_COPY_AND_ASSIGN(IcpFast);
-
-  void SetInputSource(const PointCloudSourcePtr& cloud) override;
-  void SetInputTarget(const PointCloudTargetPtr& cloud) override;
-  bool Align(const Eigen::Matrix4d& guess, Eigen::Matrix4d& result) override;
-
- private:
-  std::shared_ptr<BuildData> source_cloud_;
-  std::shared_ptr<BuildData> target_cloud_;
-  std::shared_ptr<NNS> nns_kdtree_;
-
-  struct {
-    int32_t knn_for_normal_estimate = 7;
-    int32_t max_iteration = 100;
-    float dist_outlier_ratio = 0.7;
-    int32_t interior_compensation_mode = 0;
-  } options_;
+  enum class ModelType : uint8_t { kCRTA, KCRTV, kModelTypeCount };
 };
 
-}  // namespace registrator
 }  // namespace static_map
 
-#endif  // REGISTRATORS_ICP_FAST_H_
+#endif  // BUILDER_POSE_MODEL_H_

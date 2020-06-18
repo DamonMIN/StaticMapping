@@ -36,6 +36,10 @@
           <param name="dist_outlier_ratio"> 0.7 </param>
           <param name="knn_normal_estimate"> 7 </param>
           <param name="max_iteration"> 100 </param>
+          <param name="interior_compensation_mode"> 0 </param>
+        </registrator_options>
+        <registrator_options type = "3">
+          <param name="use_ndt"> false </param>
         </registrator_options>
         <inner_filters>
           <filter name="GroundRemoval2" >
@@ -70,8 +74,8 @@
         type="0"
         gravity_constant="9.8" />
       <motion_compensation_options 
-        enable="false"
-        use_average="true" />
+        enable="true"
+        use_average="false" />
     </front_end_options>
     <back_end_options>
       <!-- type just the same as front end -->
@@ -80,8 +84,9 @@
         accepted_min_score="0.7">
         <registrator_options type = "6">
           <param name="dist_outlier_ratio"> 0.7 </param>
-          <param name="knn_normal_estimate"> 7 </param>
+          <param name="knn_normal_estimate"> 10 </param>
           <param name="max_iteration"> 100 </param>
+          <param name="interior_compensation_mode"> 0 </param>
         </registrator_options>
       </submap_matcher_options>
       <submap_options 
@@ -91,7 +96,7 @@
         enable_random_sampleing="false"
         enable_check="false"
         random_sampling_rate="0.5"
-        enable_disk_saving="true"
+        enable_disk_saving="false"
         disk_saving_delay="30"
         saving_name_prefix="s_" />
       <isam_optimizer_options 
@@ -103,10 +108,10 @@
         output_matched_cloud="true"
         loop_ignore_threshold="20"
         trying_detect_loop_count="1"
-        max_close_loop_distance="18"
+        max_close_loop_distance="8"
         max_close_loop_z_distance="10"
-        m2dp_match_score="0.99"
-        accept_scan_match_score="0.88"
+        m2dp_match_score="0.975"
+        accept_scan_match_score="0.8"
         nearest_history_pos_num="5" />
     </back_end_options>
     <output_mrvm_settings

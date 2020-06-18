@@ -172,6 +172,7 @@ You can use `doxygen Doxyfile` to generate your docs, they are in the `doc` fold
 - **Loop Close factor should be rubust**
 - **mapping using kitti data**
 - **using docker to run**
+- Fix bug for bool parameters of registrators
 - more robust normal estimate for fast icp
 - use glog or other logging lib instead of print macro
 - complete the offset for enu coordinate system
